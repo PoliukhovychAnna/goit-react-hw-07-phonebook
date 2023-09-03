@@ -1,24 +1,39 @@
-import { useSelector } from 'react-redux';
-import { selectContacts, selectFilterValue } from 'redux/selectors';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import {
+  selectError,
+  selectIsLoading,
+  selectContacts,
+  selectFilteredContacts,
+} from 'redux/selectors';
+import { fetchContacts } from 'redux/operations';
 import { Contact } from 'components/Contact/Contact';
 import { List } from './Styled.List';
 
 export const ContactList = () => {
-  const contactsState = useSelector(selectContacts);
-  console.log(contactsState);
-  const filterState = useSelector(selectFilterValue);
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
+  const filteredContacts = useSelector(selectFilteredContacts);
+  console.log(contacts);
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
 
-  if (!contactsState?.length) {
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
+
+  if (!contacts?.length && !error & !isLoading) {
     return <p>No contacts added yet.</p>;
   }
 
-  const filteredContacts = contactsState?.filter(contact =>
-    contact?.name?.toLowerCase().includes(filterState.toLowerCase())
-  );
   console.log(filteredContacts);
 
   if (!filteredContacts?.length) {
     return <p>No matches.</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
   }
 
   return (
