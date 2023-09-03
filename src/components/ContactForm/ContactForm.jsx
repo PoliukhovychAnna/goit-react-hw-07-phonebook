@@ -1,25 +1,24 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
-import { selectContacts } from 'redux/selectors';
+import { useSelector, useDispatch } from 'react-redux';
+import { selectContacts, selectIsLoading, selectFilteredContacts } from 'redux/selectors';
+import { addContact } from 'redux/operations';
 import { ContactFormContainer } from './Styled.ContactForm';
-import { addContact } from 'redux/contactsSlice';
 import { toast } from 'react-toastify';
 
 export const ContactForm = () => {
   const dispatch = useDispatch();
-  const contactsState = useSelector(selectContacts);
+  const contacts = useSelector(selectContacts);
   const handleSubmit = e => {
     e.preventDefault();
     const form = e.target;
 
-    const isNameInContacts = contactsState?.find(contact =>
+    const isNameInContacts = contacts?.find(contact =>
       contact.name
         .toLowerCase()
         .includes(form.elements.name.value.toLowerCase())
     );
 
-    const isNumberInContacts = contactsState?.find(
+    const isNumberInContacts = contacts?.find(
       contact => contact.number === form.elements.number.value
     );
 
