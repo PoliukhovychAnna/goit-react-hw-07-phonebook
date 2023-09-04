@@ -17,7 +17,7 @@ const initialState = {
 const contactsSlice = createSlice({
   name: 'contacts',
   initialState,
-  extraReducers: builder =>
+  extraReducers: builder => {
     builder
       .addCase(fetchContacts.pending, handlePending)
       .addCase(fetchContacts.fulfilled, handleGetAllContactsFulfilled)
@@ -27,7 +27,8 @@ const contactsSlice = createSlice({
       .addCase(addContact.rejected, handleRejected)
       .addCase(deleteContact.pending, handlePending)
       .addCase(deleteContact.fulfilled, handleDeleteContactFulfilled)
-      .addCase(deleteContact.rejected, handleRejected),
+      .addCase(deleteContact.rejected, handleRejected);
+  },
 });
 
 export const contactsReducer = contactsSlice.reducer;

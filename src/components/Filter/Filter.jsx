@@ -1,4 +1,4 @@
-import { filterValue } from 'redux/filterSlice';
+import { setFilter } from 'redux/filterSlice';
 import { useDispatch } from 'react-redux';
 import { StyledFilter } from './Styled.Filter';
 
@@ -10,7 +10,7 @@ export const Filter = () => {
       <input
         type="text"
         name="filter"
-        onChange={event => dispatch(filterValue(event.target.value.trim()))}
+        onChange={event => dispatch(setFilter(event.target.value.trim()))}
       />
     </StyledFilter>
   );

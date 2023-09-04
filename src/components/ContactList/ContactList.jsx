@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { Loader } from 'components/Loader';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   selectError,
@@ -37,18 +38,21 @@ export const ContactList = () => {
   }
 
   return (
-    <List>
-      {filteredContacts &&
-        filteredContacts.map(contact => {
-          return (
-            <Contact
-              key={contact.id}
-              id={contact.id}
-              name={contact.name}
-              number={contact.number}
-            />
-          );
-        })}
-    </List>
+    <>
+      <List>
+        {isLoading && <Loader />}
+        {filteredContacts &&
+          filteredContacts.map(contact => {
+            return (
+              <Contact
+                key={contact.id}
+                id={contact.id}
+                name={contact.name}
+                number={contact.number}
+              />
+            );
+          })}
+      </List>
+    </>
   );
 };

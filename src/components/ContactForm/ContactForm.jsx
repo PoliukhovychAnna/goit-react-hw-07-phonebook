@@ -1,10 +1,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import {
-  selectContacts,
-  // selectIsLoading,
-  // selectFilteredContacts,
-} from 'redux/selectors';
+import { selectContacts } from 'redux/selectors';
 import { addContact } from 'redux/operations';
 import { ContactFormContainer } from './Styled.ContactForm';
 import { toast } from 'react-toastify';
