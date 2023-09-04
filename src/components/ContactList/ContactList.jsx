@@ -15,7 +15,6 @@ export const ContactList = () => {
   const dispatch = useDispatch();
   const contacts = useSelector(selectContacts);
   const filteredContacts = useSelector(selectFilteredContacts);
-  console.log(contacts);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
@@ -26,8 +25,6 @@ export const ContactList = () => {
   if (!contacts?.length && !error & !isLoading) {
     return <p>No contacts added yet.</p>;
   }
-
-  console.log(filteredContacts);
 
   if (!filteredContacts?.length) {
     return <p>No matches.</p>;

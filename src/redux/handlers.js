@@ -20,7 +20,6 @@ export const handleAddContactFulfilled = (state, action) => {
 };
 
 export const handleDeleteContactFulfilled = (state, action) => {
-  console.log(action.payload);
   state.isLoading = false;
   state.error = null;
   const index = state.items.findIndex(
